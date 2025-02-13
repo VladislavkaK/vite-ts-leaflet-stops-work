@@ -4,13 +4,13 @@
 
 Использовал для решения, следующие технолгии:
 
-## React
-## Vite
-## Typescript
-## Redux
-## Redux-toolkit
-## Leaflet
-## Module styles (+ sass)
+1) React
+2) Vite
+3) Typescript
+4) Redux
+5) Redux-toolkit
+6) Leaflet
+7) Module styles (+ sass)
 
 Посмотреть демо можно здесь: https://vite-ts-leaflet-stops-work.vercel.app/
 
