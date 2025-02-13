@@ -1,14 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type CostType = {
-  site_id_from: number;
-  site_id_to: number;
-  iwait: number;
-  inveht: number;
-  xwait: number;
-  xpen: number;
-  xnum: number;
-  cost: number;
+  site_id_from: string;
+  site_id_to: string;
+  iwait: string;
+  inveht: string;
+  xpen: string;
+  xnum: string;
+  cost: string;
 };
 
 interface CostsState {

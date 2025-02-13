@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import LeafletMap from './components/LeafletMap';
 import { loadCsvData } from './utils/loadCsvData';
 import { setCostsData } from './store/costs';
 import { setSitesData } from './store/sites';
@@ -28,12 +29,15 @@ function App() {
     );
   }, [dispatch]);
 
-  console.log('costsData', costs);
-  console.log('sites', sites);
-
   return (
-    <div>
-      App
+    <div className='App'>
+      {costs.length === 0 && sites.length === 0 ? (
+        <div>
+          Loading...
+        </div>
+      ) : (
+        <LeafletMap sites={sites} costs={costs} />
+      )}
     </div>
   )
 }
