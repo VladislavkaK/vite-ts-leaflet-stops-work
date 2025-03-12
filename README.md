@@ -13,5 +13,20 @@
 7) Module styles (+ sass)
 8) Yandex Maps API
 
-Посмотреть демо можно здесь: https://vite-ts-leaflet-stops-work.vercel.app/
+-------------------------------------------------------------------------------------------
+
+It is necessary to reflect this information in the `/public/data`.
+
+I used the following technologies for the solution:
+
+1) React
+2) Vite
+3) Typescript
+4) Redux
+5) Redux-toolkit
+6) Leaflet
+7) Module styles (+ sass)
+8) Yandex Maps API
+
+You can watch the demo here: https://vite-ts-leaflet-stops-work.vercel.app/
 
