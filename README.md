@@ -11,6 +11,7 @@
 5) Redux-toolkit
 6) Leaflet
 7) Module styles (+ sass)
+8) Yandex Maps API
 
 Посмотреть демо можно здесь: https://vite-ts-leaflet-stops-work.vercel.app/
 

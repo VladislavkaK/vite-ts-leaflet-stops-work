@@ -42,7 +42,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/leaflet-map" element={<LeafletMap sites={sites} costs={costs} />} />
-          <Route path="/yandex-map" element={<YandexMap />} />
+          <Route path="/yandex-map" element={<YandexMap sites={sites} costs={costs} />} />
         </Routes>
       )}
     </div>

@@ -1,31 +1,54 @@
 import { Link } from 'react-router-dom';
 import { useState, ChangeEvent, useEffect } from 'react';
-import { COORDINATES_OF_MOSCOW, INITIAL_ZOOM } from '../../const';
 
+import { COORDINATES_OF_MOSCOW, INITIAL_ZOOM } from '../../const';
+import { SiteType } from '../../store/sites';
+import { CostType } from '../../store/costs';
 import styles from './style.module.scss';
 import './yandexMap.scss';
 
-const YandexMap = () => {
+interface Props {
+  sites: SiteType[];
+  costs: CostType[];
+}
+
+const YandexMap = (props: Props) => {
+  const { sites } = props;
   const [keyYandexAPI, setKeyYandexAPI] = useState<string>('');
   const [currentValue, setCurrentValue] = useState<string>('');
   const [showYandexMap, setShowYandexMap] = useState<boolean>(false);
   const [mapLoaded, setMapLoaded] = useState<boolean>(false);
 
   useEffect(() => {
+    if (!import.meta.env.VITE_YANDEX_API_KEY) return;
+
+    setKeyYandexAPI(import.meta.env.VITE_YANDEX_API_KEY);
+  }, []);
+
+  useEffect(() => {
     if (!keyYandexAPI) return;
 
     const initMap = () => {
-      const map = new (window as any).ymaps.Map("map", {
+      const map = new (window as any).ymaps.Map('map', {
         center: COORDINATES_OF_MOSCOW,
         zoom: INITIAL_ZOOM,
       });
 
-      const placemark = new (window as any).ymaps.Placemark(
-        COORDINATES_OF_MOSCOW,
-        { hintContent: "Москва", balloonContent: "Столица России" }
-      );
+      sites.forEach(({ siteName, position }) => {
+        const placemark = new (window as any).ymaps.Placemark(position, {
+          balloonContent: siteName
+        });
 
-      map.geoObjects.add(placemark);
+        placemark.events.add('click', () => {
+          map.setCenter(position, 18, { duration: 500 });
+        });
+
+        placemark.events.add('balloonclose', () => {
+          map.setCenter(COORDINATES_OF_MOSCOW, INITIAL_ZOOM, { duration: 500 });
+        });
+    
+        map.geoObjects.add(placemark);
+      });
       setMapLoaded(true);
     };
 
@@ -53,6 +76,7 @@ const YandexMap = () => {
   
               initMap();
             });
+
             setShowYandexMap(true);
           } catch (err) {
             console.error("Error during card initialization:", err);
@@ -67,7 +91,7 @@ const YandexMap = () => {
     };
 
     loadYandexMaps();
-  }, [keyYandexAPI]);
+  }, [keyYandexAPI, sites]);
 
   const handleChangeKeyYandexAPI = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
