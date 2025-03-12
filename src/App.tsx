@@ -1,7 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Routes, Route } from "react-router-dom";
 
 import LeafletMap from './components/LeafletMap';
+import YandexMap from './components/YandexMap';
+import Index from './components/Index';
 import { loadCsvData } from './utils/loadCsvData';
 import { setCostsData } from './store/costs';
 import { setSitesData } from './store/sites';
@@ -32,14 +35,18 @@ function App() {
   return (
     <div className='App'>
       {costs.length === 0 && sites.length === 0 ? (
-        <div>
+        <div className='Loader'>
           Loading...
         </div>
       ) : (
-        <LeafletMap sites={sites} costs={costs} />
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/leaflet-map" element={<LeafletMap sites={sites} costs={costs} />} />
+          <Route path="/yandex-map" element={<YandexMap />} />
+        </Routes>
       )}
     </div>
-  )
+  );
 }
 
 export default App

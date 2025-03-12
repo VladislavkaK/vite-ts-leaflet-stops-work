@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer } from 'react-leaflet';
 import { useState } from 'react';
 import { LatLngExpression } from 'leaflet';
+import { Link } from 'react-router-dom';
 import 'leaflet/dist/leaflet.css';
 
 import ZoomOnPopup from '../ZoomOnPopup';
@@ -26,6 +27,9 @@ const LeafletMap = (props: Props) => {
 
   return (
     <div className={styles.LeafletMap}>
+      <Link to="/" style={{ marginBottom: '20px' }}>
+        Back to Home
+      </Link>
       <MapContainer 
         center={COORDINATES_OF_MOSCOW}
         zoom={INITIAL_ZOOM}
